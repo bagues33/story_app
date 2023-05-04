@@ -71,7 +71,7 @@ class ProfileActivity : AppCompatActivity() {
             ?.setPositiveButton(getString(string.logout)) { _, _ ->
                 pref.clearSession()
                 val intent = Intent(this, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
                 finish()
             }

@@ -9,7 +9,8 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
     <application
@@ -21,6 +22,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubUser"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.add.AddStoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.add.CameraActivity"
+            android:exported="false" />
+
         <receiver
             android:name="com.example.storyapp.widget.ImagesBannerWidget"
             android:exported="false">
@@ -32,14 +40,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/image_banner_widget_info" />
         </receiver>
-
-        <activity
-            android:name=".ui.add.CameraActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.add.AddStoryActivity"
-            android:noHistory="true"
-            android:exported="false" />
         <activity
             android:name=".register.RegisterActivity"
             android:exported="false" />
@@ -67,7 +67,7 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true" />
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -78,6 +78,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <service
             android:name="com.example.storyapp.widget.StackWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />

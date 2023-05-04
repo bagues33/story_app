@@ -36,7 +36,6 @@ import com.example.storyapp.ui.add.AddStoryActivity
 
 class MainActivity : AppCompatActivity() {
 
-
     private lateinit var binding: ActivityMainBinding
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -53,14 +52,10 @@ class MainActivity : AppCompatActivity() {
 
         fun start(context: Context) {
             val intent = Intent(context, MainActivity::class.java)
+            Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             context.startActivity(intent)
         }
     }
-
-//    private lateinit var emailEditText: EmailEditText
-//    private lateinit var loginButton: Button
-
-//    private lateinit Button loginButton;
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,18 +83,12 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.fabNewStory.setOnClickListener {
-            AddStoryActivity.start(this)
+            val intent = Intent(this,AddStoryActivity::class.java)
+            startActivity(intent)
         }
 
         getSetting()
         setupAdapter()
-
-//        emailEditText = findViewById(R.id.emailEditText)
-//        loginButton = findViewById(R.id.loginButton)
-
-//        val loginButton = findViewById<Button>(R.id.loginButton)
-//        val emailEditText = findViewById<EmailEditText>(R.id.emailEditText)
-
 
     }
 
@@ -171,8 +160,6 @@ private fun setupAdapter() {
         super.onBackPressed()
         finish()
     }
-
-
 
 }
 
