@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import com.example.storyapp.R.string
 import androidx.appcompat.widget.AppCompatEditText
 
+
 class PasswordEditText : AppCompatEditText {
 
     constructor(context: Context) : super(context) {
@@ -30,8 +31,12 @@ class PasswordEditText : AppCompatEditText {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val password = s.toString()
                 when {
-                    password.isBlank() -> error = context.getString(string.empty_password)
-                    password.length < 8 -> error = context.getString(string.password_must_more8)
+                    password.isBlank() -> {
+                        error = context.getString(string.empty_password)
+                    }
+                    password.length < 8 -> {
+                        error = context.getString(string.password_must_more8)
+                    }
                 }
             }
 
@@ -41,3 +46,4 @@ class PasswordEditText : AppCompatEditText {
         })
     }
 }
+

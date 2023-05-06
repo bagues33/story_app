@@ -61,79 +61,8 @@ class RegisterActivity : AppCompatActivity() {
         setupAction()
         playAnimation()
         getSetting()
-        validasiPassword()
-        validasiEmail()
     }
 
-    private fun validasiPassword() {
-        val passwordEditText: PasswordEditText = findViewById(R.id.passwordEditText)
-        val registerButton: Button = findViewById(R.id.signupButton)
-        val disableColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.disabled_button_background))
-        val enableColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.royal_blue))
-
-        // Disable login button by default
-        registerButton.isEnabled = false
-        registerButton.backgroundTintList = disableColor
-
-        passwordEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Do nothing
-                registerButton.isEnabled = false
-                registerButton.backgroundTintList = disableColor
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val password = s.toString()
-                if (password.isBlank() || password.length < 8 ) {
-                    registerButton.isEnabled = false
-                    registerButton.backgroundTintList = disableColor
-                } else {
-                    registerButton.isEnabled = true
-                    registerButton.backgroundTintList = enableColor
-
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                // Do nothing
-            }
-        })
-    }
-
-    private fun validasiEmail() {
-        val emailEditText: EmailEditText = findViewById(R.id.emailEditText)
-        val registerButton: Button = findViewById(R.id.signupButton)
-        val disableColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.disabled_button_background))
-        val enableColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.royal_blue))
-
-        // Disable login button by default
-        registerButton.isEnabled = false
-        registerButton.backgroundTintList = disableColor
-
-        emailEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Do nothing
-                registerButton.isEnabled = false
-                registerButton.backgroundTintList = disableColor
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val email = s.toString()
-                if (email.isBlank() || !email.isEmailValid()) {
-                    registerButton.isEnabled = false
-                    registerButton.backgroundTintList = disableColor
-                } else {
-                    registerButton.isEnabled = true
-                    registerButton.backgroundTintList = enableColor
-
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                // Do nothing
-            }
-        })
-    }
 
     private fun getSetting() {
         val pref = SettingPreferences.getInstance(dataStore)
@@ -173,8 +102,14 @@ class RegisterActivity : AppCompatActivity() {
                 email.isEmpty() -> {
                     binding.emailEditText.error = "Masukkan email"
                 }
+                !email.isEmailValid() -> {
+                    binding.emailEditText.error = getString(R.string.invalid_email)
+                }
                 password.isEmpty() -> {
                     binding.passwordEditText.error = "Masukkan password"
+                }
+                password.length < 8 -> {
+                    binding.passwordEditText.error = getString(R.string.password_must_more8)
                 }
                 else -> {
 

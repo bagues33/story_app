@@ -77,79 +77,6 @@ class LoginActivity : AppCompatActivity() {
         setupView()
         playAnimation()
         setupAction()
-
-        validasiEmail()
-        validasiPassword()
-    }
-
-    private fun validasiEmail() {
-        val emailEditText: EmailEditText = findViewById(R.id.emailEditText)
-        val loginButton: Button = findViewById(R.id.loginButton)
-        val disableColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.disabled_button_background))
-        val enableColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.royal_blue))
-
-        // Disable login button by default
-        loginButton.isEnabled = false
-        loginButton.backgroundTintList = disableColor
-
-        emailEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Do nothing
-                loginButton.isEnabled = false
-                loginButton.backgroundTintList = disableColor
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val email = s.toString()
-                if (email.isBlank() || !email.isEmailValid()) {
-                    loginButton.isEnabled = false
-                    loginButton.backgroundTintList = disableColor
-                } else {
-                    loginButton.isEnabled = true
-                    loginButton.backgroundTintList = enableColor
-
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                // Do nothing
-            }
-        })
-    }
-
-    private fun validasiPassword() {
-        val passwordEditText: PasswordEditText = findViewById(R.id.passwordEditText)
-        val loginButton: Button = findViewById(R.id.loginButton)
-        val disableColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.disabled_button_background))
-        val enableColor = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.royal_blue))
-
-        // Disable login button by default
-        loginButton.isEnabled = false
-        loginButton.backgroundTintList = disableColor
-
-        passwordEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Do nothing
-                loginButton.isEnabled = false
-                loginButton.backgroundTintList = disableColor
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val password = s.toString()
-                if (password.isBlank() || password.length < 8 ) {
-                    loginButton.isEnabled = false
-                    loginButton.backgroundTintList = disableColor
-                } else {
-                    loginButton.isEnabled = true
-                    loginButton.backgroundTintList = enableColor
-
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                // Do nothing
-            }
-        })
     }
 
     private fun getSetting() {
@@ -186,8 +113,14 @@ class LoginActivity : AppCompatActivity() {
                 email.isEmpty() -> {
                     binding.emailEditText.error = "Masukkan email"
                 }
+                !email.isEmailValid() -> {
+                    binding.emailEditText.error = getString(R.string.empty_email)
+                }
                 password.isEmpty() -> {
                     binding.passwordEditText.error = "Masukkan password"
+                }
+                password.length < 8 -> {
+                    binding.passwordEditText.error = getString(R.string.password_must_more8)
                 }
                 else -> {
 

@@ -2,7 +2,6 @@ package com.example.storyapp.customview
 
 import android.content.Context
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.AttributeSet
 import com.example.storyapp.R.string
