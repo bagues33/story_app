@@ -4,20 +4,15 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.datastore.core.DataStore
@@ -27,8 +22,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.storyapp.R
 import com.example.storyapp.repository.Result
 import com.example.storyapp.ViewModelFactory
-import com.example.storyapp.customview.EmailEditText
-import com.example.storyapp.customview.PasswordEditText
 import com.example.storyapp.databinding.ActivityRegisterBinding
 import com.example.storyapp.isEmailValid
 import com.example.storyapp.login.LoginActivity
@@ -137,7 +130,10 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.tvActionLogin.setOnClickListener {
-            LoginActivity.start(this)
+            val i = Intent(this@RegisterActivity, LoginActivity::class.java)
+            i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(i)
+            finish()
         }
     }
 
@@ -189,5 +185,10 @@ class RegisterActivity : AppCompatActivity() {
             )
             startDelay = 500
         }.start()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

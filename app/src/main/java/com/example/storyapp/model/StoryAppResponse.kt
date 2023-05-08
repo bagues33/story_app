@@ -35,7 +35,7 @@ data class PostStoryResponse(
     val message: String
 )
 
-data class StoriesResponse(
+data class StoryResponse(
     @SerializedName("error")
     val error: Boolean,
     @SerializedName("listStory")

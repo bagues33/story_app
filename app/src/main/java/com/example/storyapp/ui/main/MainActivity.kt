@@ -4,14 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.transition.TransitionInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -23,7 +18,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.storyapp.adapter.StoryAdapter
-import com.example.storyapp.customview.EmailEditText
 import com.example.storyapp.databinding.ActivityMainBinding
 import com.example.storyapp.ui.detail.DetailStoryActivity
 import com.example.storyapp.ui.profile.ProfileActivity
@@ -32,6 +26,7 @@ import com.example.storyapp.ui.setting.SettingPreferences
 import com.example.storyapp.ui.setting.SettingViewModel
 import com.example.storyapp.ui.setting.SettingViewModelFactory
 import com.example.storyapp.ui.add.AddStoryActivity
+import com.example.storyapp.ui.maps.MapsActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -103,7 +98,8 @@ private fun setupAdapter() {
             intent.putExtra("name", story.name)
             intent.putExtra("description", story.description)
             intent.putExtra("photoUrl", story.photoUrl)
-
+            intent.putExtra("lat", story.lat)
+            intent.putExtra("lon", story.lon)
             startActivity(intent)
         }
 
@@ -144,6 +140,11 @@ private fun setupAdapter() {
         when (item.itemId) {
             R.id.btn_profile -> {
                 val i = Intent(this, ProfileActivity::class.java)
+                startActivity(i)
+                return true
+            }
+            R.id.btn_maps -> {
+                val i = Intent(this, MapsActivity::class.java)
                 startActivity(i)
                 return true
             }

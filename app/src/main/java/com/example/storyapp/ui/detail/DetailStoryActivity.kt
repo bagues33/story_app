@@ -26,6 +26,8 @@ class DetailStoryActivity : AppCompatActivity() {
             description = intent.getStringExtra("description") ?: "",
             id = intent.getStringExtra("id") ?: "",
             name = intent.getStringExtra("name") ?: "",
+            lat = intent.getDoubleExtra("lat", 0.0),
+            lon = intent.getDoubleExtra("lon", 0.0),
             photoUrl = intent.getStringExtra("photoUrl") ?: ""
         )
 

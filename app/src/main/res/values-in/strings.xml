@@ -40,4 +40,6 @@
     <string name="empty_text">Tidak ada data</string>
     <string name="change_language">Ubah Bahasa</string>
     <string name="add_story">Tambah Story</string>
+    <string name="maps">Peta</string>
+    <string name="image_story">Gambar Cerita</string>
 </resources>

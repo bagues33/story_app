@@ -16,7 +16,6 @@ class ApiConfig {
         private fun getInterceptor(token: String?): OkHttpClient {
             val loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-
             return if (token.isNullOrEmpty()) {
                 OkHttpClient.Builder()
                     .addInterceptor(loggingInterceptor)
@@ -59,7 +58,11 @@ class ApiConfig {
                 .build()
             return retrofit.create(ApiService::class.java)
         }
+
     }
+
+
+
 }
 
 

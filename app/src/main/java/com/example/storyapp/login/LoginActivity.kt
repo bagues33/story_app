@@ -4,20 +4,15 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.datastore.core.DataStore
@@ -30,8 +25,6 @@ import com.example.storyapp.SessionManager.Companion.KEY_EMAIL
 import com.example.storyapp.SessionManager.Companion.KEY_TOKEN
 import com.example.storyapp.SessionManager.Companion.KEY_USERNAME
 import com.example.storyapp.ViewModelFactory
-import com.example.storyapp.customview.EmailEditText
-import com.example.storyapp.customview.PasswordEditText
 import com.example.storyapp.database.StoryAppDao
 import com.example.storyapp.databinding.ActivityLoginBinding
 import com.example.storyapp.isEmailValid
@@ -56,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
 
         fun start(context: Context) {
             val intent = Intent(context, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             context.startActivity(intent)
         }
     }
@@ -171,10 +165,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showLoading(state: Boolean) {
-        binding.loadingLogin.isVisible = state
-        binding.emailEditText.isInvisible = state
-        binding.passwordEditText.isInvisible = state
-        binding.loginButton.isInvisible = state
+        binding.apply {
+            loadingLogin.isVisible = state
+            emailEditText.isInvisible = state
+            passwordEditText.isInvisible = state
+            loginButton.isInvisible = state
+        }
     }
 
     private fun playAnimation() {
@@ -196,6 +192,11 @@ class LoginActivity : AppCompatActivity() {
             playSequentially(title, message, emailTextView, emailEditTextLayout, passwordTextView, passwordEditTextLayout, login)
             startDelay = 500
         }.start()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
 }

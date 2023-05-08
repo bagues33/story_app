@@ -41,19 +41,6 @@ class AddStoryActivity : AppCompatActivity() {
         ViewModelFactory(application, this)
     }
 
-    companion object {
-
-        fun start(context: Context) {
-            val intent = Intent(context, AddStoryActivity::class.java)
-            context.startActivity(intent)
-        }
-
-        const val CAMERA_X_RESULT = 200
-
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -238,6 +225,14 @@ class AddStoryActivity : AppCompatActivity() {
         binding.cameraXButton.isInvisible = state
         binding.previewImageView.isInvisible = state
         binding.edtDesc.isInvisible = state
+    }
+
+    companion object {
+
+        const val CAMERA_X_RESULT = 200
+
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val REQUEST_CODE_PERMISSIONS = 10
     }
 
 }

@@ -23,7 +23,6 @@ class StoryPagingSource(private val apiService: ApiService): PagingSource<Int, S
         return try {
             val page = params.key ?: INITIAL_PAGE_INDEX
             val responseData = apiService.getStories(page, params.loadSize)
-//            storyDao.insertStories(responseData.listStory)
             LoadResult.Page(
                 data = responseData.listStory,
                 prevKey = if (page == 1) null else page - 1,

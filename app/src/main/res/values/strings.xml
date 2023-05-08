@@ -40,4 +40,6 @@
     <string name="empty_text">NO DATA</string>
     <string name="change_language">Change Language</string>
     <string name="add_story">Add Story</string>
+    <string name="maps">Maps</string>
+    <string name="image_story">Image Story</string>
 </resources>

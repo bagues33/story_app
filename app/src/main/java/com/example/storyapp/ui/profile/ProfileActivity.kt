@@ -18,14 +18,6 @@ class ProfileActivity : AppCompatActivity() {
     private val binding get() = _binding
     private lateinit var pref: SessionManager
 
-    companion object {
-
-        fun start(context: Context) {
-            val intent = Intent(context, ProfileActivity::class.java)
-            context.startActivity(intent)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityProfileBinding.inflate(layoutInflater)
@@ -70,9 +62,9 @@ class ProfileActivity : AppCompatActivity() {
         alertDialog.setTitle(getString(string.confirm_logout))
             ?.setPositiveButton(getString(string.logout)) { _, _ ->
                 pref.clearSession()
-                val intent = Intent(this, LoginActivity::class.java)
-//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                startActivity(intent)
+                val i = Intent(this@ProfileActivity, LoginActivity::class.java)
+                i.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(i)
                 finish()
             }
             ?.setNegativeButton(getString(string.cancel), null)

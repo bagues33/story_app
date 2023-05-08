@@ -8,6 +8,7 @@ import com.example.storyapp.login.LoginViewModel
 import com.example.storyapp.register.RegisterViewModel
 import com.example.storyapp.ui.add.CreateStoryViewModel
 import com.example.storyapp.ui.main.MainViewModel
+import com.example.storyapp.ui.maps.MapsViewModel
 
 class ViewModelFactory(private val app: Application, private val context: Context) : ViewModelProvider.Factory {
 
@@ -37,6 +38,8 @@ class ViewModelFactory(private val app: Application, private val context: Contex
             return RegisterViewModel(Injection.provideRepository(app, context)) as T
         } else if (modelClass.isAssignableFrom(CreateStoryViewModel::class.java)) {
             return CreateStoryViewModel(Injection.provideRepository(app, context)) as T
+        } else if (modelClass.isAssignableFrom(MapsViewModel::class.java)) {
+            return MapsViewModel(Injection.provideRepository(app, context)) as T
         }
 
         throw IllegalArgumentException("Unknown ViewModel class")

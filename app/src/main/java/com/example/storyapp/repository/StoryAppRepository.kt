@@ -12,6 +12,7 @@ import com.example.storyapp.database.StoryApp
 import com.example.storyapp.model.LoginResponse
 import com.example.storyapp.model.PostStoryResponse
 import com.example.storyapp.model.SignUpResponse
+import com.example.storyapp.model.StoryResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
@@ -57,6 +58,17 @@ class StoryAppRepository(private val apiService: ApiService) {
             emit(Result.Success(response))
         } catch (e: Exception) {
             Log.e("LoginViewModel", "postLogin: ${e.message.toString()}")
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun getStoryLocation(): LiveData<Result<StoryResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getStoriesWithLocation(1)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            Log.d("ListStoryViewModel", "getStoriesWithLocation: ${e.message.toString()} ")
             emit(Result.Error(e.message.toString()))
         }
     }
